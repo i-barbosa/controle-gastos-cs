@@ -2975,11 +2975,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aluno\\Documents\\i-barbosa\\controle-gastos-cs\\ControleGastos.Api\\ControleGastos.Api.csproj",
+      "projectUniqueName": "C:\\Users\\aluno\\Downloads\\controle-gastos-cs\\ControleGastos.Api\\ControleGastos.Api.csproj",
       "projectName": "ControleGastos.Api",
-      "projectPath": "C:\\Users\\aluno\\Documents\\i-barbosa\\controle-gastos-cs\\ControleGastos.Api\\ControleGastos.Api.csproj",
+      "projectPath": "C:\\Users\\aluno\\Downloads\\controle-gastos-cs\\ControleGastos.Api\\ControleGastos.Api.csproj",
       "packagesPath": "C:\\Users\\aluno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aluno\\Documents\\i-barbosa\\controle-gastos-cs\\ControleGastos.Api\\obj\\",
+      "outputPath": "C:\\Users\\aluno\\Downloads\\controle-gastos-cs\\ControleGastos.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aluno\\AppData\\Roaming\\NuGet\\NuGet.Config"
