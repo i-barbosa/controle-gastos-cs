@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { api } from '../api/api';
 import type { CriarTransacaoDTO, Pessoa } from '../types';
-export default function TransacaoForm({ 
-  pessoas, 
-  onCreated 
-}: { 
-  pessoas: Pessoa[]; 
-  onCreated: () => void; 
+
+// Formulário responsável pelo cadastro de novas transações.
+export default function TransacaoForm({
+  pessoas,
+  onCreated
+}: {
+  pessoas: Pessoa[];
+  onCreated: () => void;
 }) {
+  // Armazena os dados preenchidos no formulário.
   const [form, setForm] = useState<CriarTransacaoDTO>({
     pessoaId: '',
     descricao: '',
@@ -15,27 +18,47 @@ export default function TransacaoForm({
     tipo: 0
   });
 
+  // Obtém a pessoa atualmente selecionada.
   const pessoaSelecionada = pessoas.find(p => p.id === form.pessoaId);
 
+  // Sempre que uma pessoa menor de idade for selecionada,
+  // define automaticamente o tipo como despesa.
   useEffect(() => {
     if (pessoaSelecionada?.idade && pessoaSelecionada.idade < 18) {
       setForm(prev => ({ ...prev, tipo: 0 }));
     }
   }, [pessoaSelecionada]);
 
+  // Envia os dados da transação para a API.
   const handleSubmit = async (e: React.FormEvent) => {
+    // Impede o recarregamento da página ao enviar o formulário.
     e.preventDefault();
+
     try {
+      // Cadastra a transação.
       await api.createTransacao(form);
-      setForm({ pessoaId: '', descricao: '', valor: 0, tipo: 0 });
+
+      // Limpa os campos do formulário.
+      setForm({
+        pessoaId: '',
+        descricao: '',
+        valor: 0,
+        tipo: 0
+      });
+
+      // Atualiza os dados exibidos na tela.
       onCreated();
     } catch (error: any) {
+      // Exibe a mensagem de erro retornada pela API.
       alert(error.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl shadow-sm border space-y-5">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-2xl shadow-sm border space-y-5"
+    >
       <h2 className="text-2xl font-semibold">Nova Transação</h2>
 
       <select
@@ -45,6 +68,8 @@ export default function TransacaoForm({
         required
       >
         <option value="">Selecione uma pessoa</option>
+
+        {/* Exibe todas as pessoas cadastradas. */}
         {pessoas.map(p => (
           <option key={p.id} value={p.id}>
             {p.nome} ({p.idade} anos)
@@ -78,7 +103,12 @@ export default function TransacaoForm({
         className="w-full px-4 py-3 border rounded-xl"
       >
         <option value={0}>Despesa</option>
-        <option value={1} disabled={pessoaSelecionada && pessoaSelecionada.idade < 18}>
+
+        {/* Menores de idade não podem registrar receitas. */}
+        <option
+          value={1}
+          disabled={pessoaSelecionada && pessoaSelecionada.idade < 18}
+        >
           Receita
         </option>
       </select>
