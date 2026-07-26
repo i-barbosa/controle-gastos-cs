@@ -348,7 +348,7 @@ export default function Totais({ totais, transacoes }: Props) {
                       : 'text-red-600'
                   }`}
                 >
-                  RR$ {p.saldo.toLocaleString('pt-BR', {
+                  R$ {p.saldo.toLocaleString('pt-BR', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                   })}
